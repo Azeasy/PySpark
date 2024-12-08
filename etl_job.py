@@ -63,8 +63,7 @@ if __name__ == "__main__":
     restaraunts_df = process_restaraunts_df()
     weather_df = process_weather_df()
 
-    restaraunts_df = restaraunts_df
-    weather_df = weather_df
+    restaraunts_df = restaraunts_df.dropDuplicates()
     weather_df = weather_df.dropDuplicates()
 
     joined_df = restaraunts_df.join(
