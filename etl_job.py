@@ -8,7 +8,7 @@ from modules.transformations import (
 from env import BASE_DIR
 
 
-def process_restaraunts_df():
+def process_restaurants_df():
     input_folder = os.path.join(BASE_DIR, 'restaurant_csv')
     # Extracting the data
     df = (
@@ -64,13 +64,13 @@ if __name__ == "__main__":
         .getOrCreate()
     )
 
-    restaraunts_df = process_restaraunts_df()
+    restaurants_df = process_restaurants_df()
     weather_df = process_weather_df()
 
-    restaraunts_df = restaraunts_df.dropDuplicates()
+    restaurants_df = restaurants_df.dropDuplicates()
     weather_df = weather_df.dropDuplicates()
 
-    joined_df = restaraunts_df.join(
+    joined_df = restaurants_df.join(
         weather_df,
         on="geohash",
         how="left"
