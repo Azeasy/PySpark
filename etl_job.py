@@ -1,13 +1,15 @@
+import os
 from pyspark.sql import SparkSession
 
 from modules.transformations import (
     populate_df,
     extend_df_with_geohash,
 )
+from env import BASE_DIR
 
 
 def process_restaraunts_df():
-    input_folder = "/Users/azeasy/Desktop/EPAM/task_2_app/restaurant_csv"
+    input_folder = os.path.join(BASE_DIR, 'restaurant_csv')
     # Extracting the data
     df = (
         spark.read.format("csv")
@@ -26,7 +28,8 @@ def process_restaraunts_df():
 
 
 def process_weather_df():
-    input_folder = "/Users/azeasy/Desktop/EPAM/task_2_app/weather"
+    input_folder = os.path.join(BASE_DIR, 'weather')
+
     # Extracting the data
     df = (
         spark.read.format("parquet")
@@ -43,7 +46,8 @@ def process_weather_df():
 
 
 def write_data(df):
-    output_folder = "/Users/azeasy/Desktop/EPAM/task_2_app/output"
+    output_folder = os.path.join(BASE_DIR, 'output')
+
     # Loading the data
     df.write \
     .mode("overwrite") \
