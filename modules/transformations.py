@@ -28,8 +28,8 @@ def populate_df(df):
     # and there exists this same city in the database
     # but the task is to make API request to fill in lat and lng,
     # so I'll use this record to compare our data to API
-    target_df = final_df.filter(col("city") == 'Dillon')
-    target_df.show()
+    # target_df = final_df.filter(col("city") == 'Dillon')
+    # target_df.show()
 
     return final_df
 
