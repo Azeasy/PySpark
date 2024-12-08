@@ -34,7 +34,7 @@ def populate_df(df):
     return final_df
 
 
-def extend_df_with_geohash(df):
+def replace_lat_lng_with_geohash(df):
     # Defining UDF
     get_geohash_udf = udf(get_geohash, StringType())
 
@@ -42,4 +42,4 @@ def extend_df_with_geohash(df):
         "geohash",
         when(col("lng").isNotNull(), get_geohash_udf(col("lat"), col("lng"))).otherwise("")
     )
-    return extended_df
+    return extended_df.drop("lat").drop("lng")

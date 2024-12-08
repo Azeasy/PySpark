@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession
 
 from modules.transformations import (
     populate_df,
-    extend_df_with_geohash,
+    replace_lat_lng_with_geohash,
 )
 from env import BASE_DIR
 
@@ -22,7 +22,7 @@ def process_restaraunts_df():
     # Transforming the data
     df = populate_df(df)
 
-    df = extend_df_with_geohash(df).drop("lat").drop("lng")
+    df = replace_lat_lng_with_geohash(df)
     df.show()
     return df
 
@@ -39,7 +39,7 @@ def process_weather_df():
     df.show()
 
     # Transforming the data
-    df = extend_df_with_geohash(df).drop("lat").drop("lng")
+    df = replace_lat_lng_with_geohash(df)
     df.show()
 
     return df
